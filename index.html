@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crystal Collector</title>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+
+<body>
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Crystal Collector</h1>
+            <hr>
+            <!-- <button type="button" class="btn btn-warning btn-lg">Play again</button> -->
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="row" id="Rules">
+            <h3> Rules of the game.</h3> <br>
+            <p>You will be given a target number at the start of your game.
+                There are four crystals below. <br>By clicking on a crystal, you will add a specific amount of points
+                to your total score. <br>To win the game your total score has to match target score, if your score goes
+                over the target score, you lose.<br>
+                The value of each crystal is hidden from you until you click on it.
+                Each time when the game starts, the game will change the values of each crystal.</p>
+
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-lg-4" id="targetscorebox">
+                <div class="row">Target Score:</div>
+                <div class="row" id="target"></div>
+            </div>
+            <div class="col-lg-4" id="yourscorebox">
+                <div class="row">Your Score:</div>
+                <div class="row" id="yourScore"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4" id="winsscorebox">
+                <div class="row">Wins:</div>
+                <div class="row" id="wins"></div>
+            </div>
+            <div class="col-lg-4" id="lossesscorebox">
+                <div class="row">Losses:</div>
+                <div class="row" id="losses"></div>
+            </div>
+        </div>
+
+
+        <br>
+        <hr>
+
+        <div class="row">
+            <div class="card-body" id="crystals">
+                <!-- <button id="button-1" class="btn btn-light number"><img src="assets/images/blue.jpg" class="crystal1"><span></span></button>
+                <button id="button-2" class="btn btn-light number"><img src="assets/images/pink.jpg" class="crystal2"><span></span></button>
+                <button id="button-3" class="btn btn-light number"><img src="assets/images/white.jpg" class="crystal3"><span></span></button>
+                <button id="button-4" class="btn btn-light number"><img src="assets/images/yellow.png" class="crystal4"><span></span></button> -->
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- <script type="text/javascript" src="assets/javascript/game.js"></script> -->
+
+    <script type="text/javascript">
+        var wins = 0;
+        var losses = 0;
+        var target;
+        var yourScore = 0;
+        var numberOptions = [];
+        var imageOptions = ["assets/images/blue.jpg", "assets/images/pink.jpg", "assets/images/white.jpg",
+            "assets/images/yellow.png"
+        ];
+
+
+        for (var i = 0; i <= 3; i++) {
+            var randomNum = Math.floor(Math.random() * 12 + 1);
+            numberOptions.push(randomNum);
+        }
+
+        // Next we create a for loop to create crystals for every numberOption.
+        for (var i = 0; i < numberOptions.length; i++) {
+
+            // For each iteration, we will create an imageCrystal
+            var imageCrystal = $("<img>");
+
+            // First each crystal will be given the class ".crystal-image".
+            // This will allow the CSS to take effect.
+            imageCrystal.addClass("crystal-image");
+
+            // Each imageCrystal will be given a src link to the crystal image
+            imageCrystal.attr("src", imageOptions[i]);
+
+
+
+            // Each imageCrystal will be given a data attribute called data-crystalValue.
+            // This data attribute will be set equal to the array value.
+            imageCrystal.attr("data-crystalvalue", numberOptions[i]);
+
+            // Lastly, each crystal image (with all it classes and attributes) will get added to the page.
+            $("#crystals").append(imageCrystal);
+        }
+
+        // functions
+
+        function restartGame() {
+            yourScore = 0;
+            $("#yourScore").text(yourScore);
+            target = Math.floor(Math.random() * 101 + 19)
+            $("#target").text(target);
+        }
+
+        $(".crystal-image").on("click", function () {
+
+            // Determining the crystal's value requires us to extract the value from the data attribute.
+            // Using the $(this) keyword specifies that we should be extracting the crystal value of the clicked crystal.
+            // Using the .attr("data-crystalvalue") allows us to grab the value out of the "data-crystalvalue" attribute.
+            // Since attributes on HTML elements are strings, we must convert it to an integer before adding to the counter
+
+            var crystalValue = ($(this).attr("data-crystalvalue"));
+            crystalValue = parseInt(crystalValue);
+            // We then add the crystalValue to the user's "counter" which is a global variable.
+            // Every click, from every crystal adds to the global counter.
+            yourScore += crystalValue;
+            // counter = counter + cxrys
+
+            // All of the same game win-lose logic applies. So the rest remains unchanged.
+            // alert("New score: " + yourScore);
+            $("#yourScore").text(yourScore);
+
+            if (yourScore === target) {
+                wins++;
+                $("#wins").text(wins);
+                restartGame();
+            } else if (yourScore >= target) {
+                losses++;
+                $("#losses").text(losses);
+                restartGame();
+            }
+            return;
+
+        });
+        restartGame();
+    </script>
+
+
+</body>
+
+</html>

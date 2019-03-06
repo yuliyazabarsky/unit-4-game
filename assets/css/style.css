@@ -1,0 +1,48 @@
+* {
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+p {
+    font-size: 18px;
+}
+
+img {
+    size: 150px 150px;
+
+}
+
+.row {
+    font-size: 28px;
+
+}
+
+body {
+    margin: 0 auto;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: lightgoldenrodyellow;
+}
+
+#game {
+    font-size: 200 px;
+
+}
+
+hr {
+    border: solid 1px;
+}
+
+.jumbotron {
+    background-color: lightsalmon;
+}
+
+#target,
+#wins,
+#losses,
+#your-score {
+    color: purple;
+}
