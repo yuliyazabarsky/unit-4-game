@@ -1,7 +1,7 @@
 * {
     box-sizing: border-box;
 }
-
+crystal
 h1 {
     text-align: center;
     font-family: 'Times New Roman', Times, serif;
@@ -13,9 +13,12 @@ p {
 
 img {
     size: 150px 150px;
-
+    margin-right:4px;
+    margin-left: 10px;
 }
-
+#crystals{
+    position: center;
+}
 .row {
     font-size: 28px;
 
